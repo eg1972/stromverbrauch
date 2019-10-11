@@ -78,7 +78,6 @@ parser_gettable.add_argument('--port', action='store', type=int, default='3306',
 parser_gettable.add_argument('--user', action='store', default='python_user', help='User for DB (default: python_user)')
 parser_gettable.add_argument('--password', action='store', required=True, default='password', help='password for user against DB (default: password)')
 parser_gettable.add_argument('--table', action='store', required=True, help='table to work with (default: None)')
-parser_gettable.add_argument('--dummy', action='store', required=False, default='dummy', help='dummy test argument')
 parser_gettable.set_defaults(preis='0.123')
 parser_gettable.set_defaults(command='gettable')
 # Parser for addone
