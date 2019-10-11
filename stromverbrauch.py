@@ -68,6 +68,7 @@ parser_plotall.add_argument('--port', action='store', type=int, default='3306', 
 parser_plotall.add_argument('--database', action='store', default='stromverbrauch', help='database to work with (default: stromverbrauch)')
 parser_plotall.add_argument('--user', action='store', default='python_user', help='User for DB (default: python_user)')
 parser_plotall.add_argument('--password', action='store', required=True, default='password', help='password for user against DB (default: password)')
+parser_plotall.add_argument('--dummy', action='store', required=False, default='dummy', help='dummy test argument')
 parser_plotall.set_defaults(preis='0.123')
 parser_plotall.set_defaults(command='plotall')
 # Parser for gettable
