@@ -11,12 +11,14 @@ Examples:
 ./stromverbrauch.py gettable --table wasser --password 0Vfe-ims7 --host 192.168.1.10
 
 Each month:
-stromverbrauch_v7.py addone --host 192.168.1.10 --table wasser --password 0Vfe-ims7 --zaehlerstand 649
-stromverbrauch_v7.py gettable --table wasser --password 0Vfe-ims7 --host 192.168.1.10|tail
-stromverbrauch_v7.py addone --host 192.168.1.10 --table stromsonst --password 0Vfe-ims7 --zaehlerstand 17553.98
-stromverbrauch_v7.py gettable --table stromsonst --password 0Vfe-ims7 --host 192.168.1.10|tail
-stromverbrauch_v7.py addone --host 192.168.1.10 --table waermepumpe --password 0Vfe-ims7 --zaehlerstand 15456.76
-stromverbrauch_v7.py gettable --table waermepumpe --password 0Vfe-ims7 --host 192.168.1.10|tail
+cd /home/eddgest/PycharmProjects/stromverbrauch
+./stromverbrauch_v8.py addone --host 192.168.1.10 --table wasser --password 0Vfe-ims7 --zaehlerstand 649
+./stromverbrauch_v8.py gettable --table wasser --password 0Vfe-ims7 --host 192.168.1.10|tail
+./stromverbrauch_v8.py addone --host 192.168.1.10 --table stromsonst --password 0Vfe-ims7 --zaehlerstand 17553.98
+./stromverbrauch_v8.py gettable --table stromsonst --password 0Vfe-ims7 --host 192.168.1.10|tail
+./stromverbrauch_v8.py addone --host 192.168.1.10 --table waermepumpe --password 0Vfe-ims7 --zaehlerstand 15456.76
+./stromverbrauch_v8.py gettable --table waermepumpe --password 0Vfe-ims7 --host 192.168.1.10|tail
+./stromverbrauch_v8.py plotall --password 0Vfe-ims7 --user python_user --database stromverbrauch
 
 To quickly create a DB:
     mysqldump --lock-tables -h 192.168.1.10 -u java_user -p0Vfe-ims7 java_test > /mnt/data-aldi-admin/gereon/backup/mysql-backup/java_test-dbbackup_NUC_`date +"%Y%m%d"`.bak
