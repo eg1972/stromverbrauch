@@ -21,7 +21,7 @@ cd /home/eddgest/PycharmProjects/stromverbrauch
 ./stromverbrauch_v8.py plotall --password 0Vfe-ims7 --user python_user --database stromverbrauch
 
 To quickly create a DB:
-    mysqldump --lock-tables -h 192.168.1.10 -u java_user -p0Vfe-ims7 java_test > /mnt/data-aldi-admin/gereon/backup/mysql-backup/java_test-dbbackup_NUC_`date +"%Y%m%d"`.bak
+    mysqldump --lock-tables -h 192.168.1.10 -u python_user -p0Vfe-ims7 stromverbrauch > /mnt/data-aldi-admin/gereon/backup/mysql-backup/stromverbrauch-dbbackup_NUC_`date +"%Y%m%d"`.bak
     docker run --publish 127.0.0.1:3306:3306 --name mariadb -e MYSQL_ROOT_PASSWORD=0Vfe-ims7 -d mariadb:latest
 
     mysql -h"127.0.0.1" -P"3306" -u"root" -p"0Vfe-ims7"
@@ -156,10 +156,12 @@ elif args.command == 'gettable':
 elif args.command == 'addone':
     print('===> addone')
     try:
+        #print('===> addone: connecting to DB...')
         stromverbrauch = sfunc.connect_db(args)
     except:
         print('===> ERROR: could not init stromverbrauch from sfunc.connect_db(args). Try \'... -h\'')
         sys.exit()
+    #print('===> addone: getting last row...')
     row = stromverbrauch.getlastrow(args.table)
     index_old, datum_old, zaehlerstand_old, verbrauch_old, verbrauch_old, kosten_old = row
     verbrauch = float(args.zaehlerstand) - zaehlerstand_old
@@ -178,6 +180,8 @@ elif args.command == 'addone':
       print('===> previous row: ',rows[-1])
       sys.exit()
     # all checks pass... execute query
+    #print('===> addone: adding new row...')
+    #print(query_dict)
     result = stromverbrauch.addone(query_dict)
     if result==False:
       print('===> ERROR: addone() failed. Check your parameters.')
@@ -221,7 +225,7 @@ stromverbrauch_v7.py addone --host 192.168.1.10 --table waermepumpe --password 0
 stromverbrauch_v7.py gettable --table waermepumpe --password 0Vfe-ims7 --host 192.168.1.10|tail
 
 To quickly create a DB:
-    mysqldump --lock-tables -h 192.168.1.10 -u java_user -p0Vfe-ims7 java_test > /mnt/data-aldi-admin/gereon/backup/mysql-backup/java_test-dbbackup_NUC_`date +"%Y%m%d"`.bak
+    mysqldump --lock-tables -h 192.168.1.10 -u python_user -p0Vfe-ims7 stromverbrauch > /mnt/data-aldi-admin/gereon/backup/mysql-backup/stromverbrauch-dbbackup_NUC_`date +"%Y%m%d"`.bak
     docker run --publish 127.0.0.1:3306:3306 --name mariadb -e MYSQL_ROOT_PASSWORD=0Vfe-ims7 -d mariadb:latest
 
     mysql -h"127.0.0.1" -P"3306" -u"root" -p"0Vfe-ims7"
