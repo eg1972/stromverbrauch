@@ -47,3 +47,13 @@ mysql -h"127.0.0.1" -P"3306" -u"python_user" -p"12test34" stromverbrauch
 show grants;
 show triggers;
 ```
+
+## Examples
+```
+./stromverbrauch.py plotall --password 0Vfe-ims7 --user python_user --database stromverbrauch
+./stromverbrauch.py addone --table wasser --password 0Vfe-ims7 --datum 2019-07-01 --zaehlerstand 675.0
+./stromverbrauch.py addone --table stromsonst --password 0Vfe-ims7 --datum 2019-07-01 --zaehlerstand 18210.74
+./stromverbrauch.py addone --table waermepumpe --password 0Vfe-ims7 --datum 2019-07-01 --zaehlerstand 15685.49
+./stromverbrauch.py delone --table wasser --password 0Vfe-ims7 --host 192.168.1.10 --datum 2019-05-01
+./stromverbrauch.py gettable --table wasser --password 0Vfe-ims7 --host 192.168.1.10
+```

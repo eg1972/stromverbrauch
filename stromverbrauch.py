@@ -1,44 +1,5 @@
 #!/usr/bin/python3
 
-'''
-Script to add, get and plot values from the stromverbrauch database.
-Examples:
-./stromverbrauch.py plotall --password 0Vfe-ims7 --user python_user --database stromverbrauch
-./stromverbrauch.py addone --table wasser --password 0Vfe-ims7 --datum 2019-07-01 --zaehlerstand 675.0
-./stromverbrauch.py addone --table stromsonst --password 0Vfe-ims7 --datum 2019-07-01 --zaehlerstand 18210.74
-./stromverbrauch.py addone --table waermepumpe --password 0Vfe-ims7 --datum 2019-07-01 --zaehlerstand 15685.49
-./stromverbrauch.py delone --table wasser --password 0Vfe-ims7 --host 192.168.1.10 --datum 2019-05-01
-./stromverbrauch.py gettable --table wasser --password 0Vfe-ims7 --host 192.168.1.10
-
-Each month:
-cd /home/eddgest/PycharmProjects/stromverbrauch
-./stromverbrauch_v8.py addone --host 192.168.1.10 --table wasser --password 0Vfe-ims7 --zaehlerstand 649
-./stromverbrauch_v8.py gettable --table wasser --password 0Vfe-ims7 --host 192.168.1.10|tail
-./stromverbrauch_v8.py addone --host 192.168.1.10 --table stromsonst --password 0Vfe-ims7 --zaehlerstand 17553.98
-./stromverbrauch_v8.py gettable --table stromsonst --password 0Vfe-ims7 --host 192.168.1.10|tail
-./stromverbrauch_v8.py addone --host 192.168.1.10 --table waermepumpe --password 0Vfe-ims7 --zaehlerstand 15456.76
-./stromverbrauch_v8.py gettable --table waermepumpe --password 0Vfe-ims7 --host 192.168.1.10|tail
-./stromverbrauch_v8.py plotall --password 0Vfe-ims7 --user python_user --database stromverbrauch
-
-To quickly create a DB:
-    mysqldump --lock-tables -h 192.168.1.10 -u python_user -p0Vfe-ims7 stromverbrauch > /mnt/data-aldi-admin/gereon/backup/mysql-backup/stromverbrauch-dbbackup_NUC_`date +"%Y%m%d"`.bak
-    docker run --publish 127.0.0.1:3306:3306 --name mariadb -e MYSQL_ROOT_PASSWORD=0Vfe-ims7 -d mariadb:latest
-
-    mysql -h"127.0.0.1" -P"3306" -u"root" -p"0Vfe-ims7"
-    create database stromverbrauch;
-    create user 'python_user'@'%' identified by '0Vfe-ims7';
-    grant all privileges on stromverbrauch.* to 'python_user'@'%' identified by '0Vfe-ims7';
-    flush privileges;
-    use stromverbrauch;
-    source python_test-dbbackup_NUC_20190412.bak
-
-    show grants for 'python_user'@'%';
-
-    mysql -h"127.0.0.1" -P"3306" -u"python_user" -p"0Vfe-ims7" stromverbrauch
-    show grants;
-    show triggers;
-'''
-
 import sys
 # extend the search path for my module 'db_access' and the functions
 sys.path.append('/home/eddgest/PycharmProjects/stromverbrauch/libs')
