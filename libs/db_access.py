@@ -43,7 +43,10 @@ class db_access():
                 self.conn = engine.connect()
                 print('===> Connected.')
             except sqlalchemy.exc.OperationalError as e:
-                print('===> ERROR\n', e)
+                print('===> ERROR: DB connection failed; Wrong host, port, database, user or password ?\n', e)
+                sys.exit()
+            except:
+                print('===> ERROR: unspecified\n', e)
                 sys.exit()
         elif type(arg) is str:
             try:
@@ -56,7 +59,7 @@ class db_access():
                 self.conn = engine.connect()
                 print('===> Connected.')
             except sqlalchemy.exc.OperationalError as e:
-                print('===> ERROR\n', e)
+                print('===> ERROR: DB connection failed\n', e)
                 sys.exit()
         else:
             print(arg)
@@ -80,13 +83,20 @@ class db_access():
             Returns EMPTY on error. '''
         rows = ['EMPTY']
         try:
-            print("===> Query: ", query)
+            print("===> Query (execute_query): ", query)
             cursor = self.conn.execute(query)
             rows = cursor.fetchall()
-        except sqlalchemy.exc.OperationalError as e:
-            print('===> ERROR\n', e)
+        except sqlalchemy.exc.ProgrammingError as e:
+            print('===> ERROR: Query failed; Wrong table ?\n', e)
+        except:
+            print('===> ERROR: unspecified\n', e)
+            #print('===> ERROR: Query failed\n')
         finally:
-            cursor.close()
+            try:
+                cursor.close()
+            except:
+                print('===> ERROR: no curser to close.')
+                sys.exit(1)
         return rows;
 
     def getone(self, dictArg):

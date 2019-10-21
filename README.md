@@ -21,12 +21,22 @@ cd /home/eddgest/PycharmProjects/stromverbrauch
 ./stromverbrauch.py plotall --password 0Vfe-ims7 --user python_user --database stromverbrauch
 ```
 
-## Create a DB for testing
+## Testing
+### Automated Testing
+Run script to automatically
+1. start and initialise a maria-DB container
+2. run some commands against the stromverbrauch-DB
+3. stop and delete the container again
+```
+./test-procedure.bash
+```
+
+### Manually Create a DB for testing
 To quickly create a DB:
 https://hub.docker.com/_/mariadb
 
 ```
-mysqldump --lock-tables -h 192.168.1.10 -u java_user -p0Vfe-ims7 java_test > /mnt/data-aldi-admin/gereon/backup/mysql-backup/java_test-dbbackup_NUC_`date +"%Y%m%d"`.bak
+mysqldump --lock-tables -h 192.168.1.10 -u python_user -p0Vfe-ims7 stromverbrauch > /tmp/stromverbrauch-dbbackup_NUC_`date +"%Y%m%d"`.sql
 
 docker run -d --rm --publish 127.0.0.1:3306:3306 \
     -e MYSQL_ROOT_PASSWORD=12test34 \
@@ -39,7 +49,7 @@ create user 'python_user'@'%' identified by '12test34';
 grant all privileges on stromverbrauch.* to 'python_user'@'%' identified by '12test34';
 flush privileges;
 use stromverbrauch;
-source 6-mysql_java_test_dump.sql
+source stromverbrauch-dbbackup_NUC_`date +"%Y%m%d"`.sql
 
 show grants for 'python_user'@'%';
 
@@ -48,7 +58,7 @@ show grants;
 show triggers;
 ```
 
-## Examples
+## Command Examples
 ```
 ./stromverbrauch.py plotall --password 0Vfe-ims7 --user python_user --database stromverbrauch
 ./stromverbrauch.py addone --table wasser --password 0Vfe-ims7 --datum 2019-07-01 --zaehlerstand 675.0
