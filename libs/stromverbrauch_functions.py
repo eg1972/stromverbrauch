@@ -3,7 +3,9 @@
 import sys
 
 # extend the search path for my module 'db_access' and the functions
-sys.path.append('/home/eddgest/PycharmProjects/stromverbrauch/libs')
+#sys.path.append('/home/eddgest/PycharmProjects/stromverbrauch/libs')
+sys.path.append('/home/eddgest/.local/lib/python3.6/site-packages/stromverbrauch')
+#import stromverbrauch.db_access
 import db_access
 import pandas as pd
 
@@ -37,8 +39,6 @@ def get_plotdata(stromverbrauch):
     datum, kosten_stromsonst = stromverbrauch.getxy("stromsonst")
     datum, kosten_waermepumpe = stromverbrauch.getxy("waermepumpe")
     datum, kosten_wasser = stromverbrauch.getxy("wasser")
-    # print('===> getxy():\n', rows)
-    # stromverbrauch.close_db()
     return datum, kosten_wasser, kosten_stromsonst, kosten_waermepumpe
 
 

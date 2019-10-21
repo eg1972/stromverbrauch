@@ -72,11 +72,6 @@ class db_access():
         '''
         print("===> Closing Database Connection...")
         self.conn.close()
-        # if self.conn.is_connected():
-        #    self.conn.close()
-        #    if self.conn.is_connected() == False:
-        #        print('Closed.')
-        # return 'closed';
 
     def execute_query(self, query):
         '''Execute a query.

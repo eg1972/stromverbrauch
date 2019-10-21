@@ -2,19 +2,19 @@
 
 import sys
 # extend the search path for my module 'db_access' and the functions
-sys.path.append('/home/eddgest/PycharmProjects/stromverbrauch/libs')
-#import db_access
+#sys.path.append('/home/eddgest/PycharmProjects/stromverbrauch/libs')
+sys.path.append('/home/eddgest/.local/lib/python3.6/site-packages/stromverbrauch')
 #functions for this program
 import stromverbrauch_functions as sfunc
+#import stromverbrauch.stromverbrauch_functions as sfunc
 
 #for matplotlib
-#import numpy as np
 import matplotlib.pyplot as plt
 # for Pandas DataFrame
 import pandas as pd
 # for argparse
 import argparse
-import textwrap
+#import textwrap
 import datetime
 
 #TODO: Authentication
