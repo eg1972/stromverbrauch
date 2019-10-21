@@ -34,7 +34,6 @@ Run script to automatically
 ### Manually Create a DB for testing
 To quickly create a DB:
 https://hub.docker.com/_/mariadb
-
 ```
 mysqldump --lock-tables -h 192.168.1.10 -u python_user -p0Vfe-ims7 stromverbrauch > /tmp/stromverbrauch-dbbackup_NUC_`date +"%Y%m%d"`.sql
 
@@ -57,6 +56,15 @@ mysql -h"127.0.0.1" -P"3306" -u"python_user" -p"12test34" stromverbrauch
 show grants;
 show triggers;
 ```
+
+## Packaging
+### Automated Packaging
+Run script to automatically copy the files into place
+```
+./build-package.bash
+```
+
+### Manually build a package
 
 ## Command Examples
 ```
