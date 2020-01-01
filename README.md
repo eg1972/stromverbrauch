@@ -11,14 +11,14 @@ The front end can:
 ## Monthly maintenance
 ```
 Each month:
-cd /home/eddgest/PycharmProjects/stromverbrauch
-./stromverbrauch.py addone --host 192.168.1.10 --table wasser --password 0Vfe-ims7 --zaehlerstand 649
-./stromverbrauch.py gettable --table wasser --password 0Vfe-ims7 --host 192.168.1.10|tail
-./stromverbrauch.py addone --host 192.168.1.10 --table stromsonst --password 0Vfe-ims7 --zaehlerstand 17553.98
-./stromverbrauch.py gettable --table stromsonst --password 0Vfe-ims7 --host 192.168.1.10|tail
-./stromverbrauch.py addone --host 192.168.1.10 --table waermepumpe --password 0Vfe-ims7 --zaehlerstand 15456.76
-./stromverbrauch.py gettable --table waermepumpe --password 0Vfe-ims7 --host 192.168.1.10|tail
-./stromverbrauch.py plotall --password 0Vfe-ims7 --user python_user --database stromverbrauch
+#cd /home/eddgest/PycharmProjects/stromverbrauch
+stromverbrauch.py gettable --table wasser --password 0Vfe-ims7 --host 192.168.1.10|tail
+stromverbrauch.py gettable --table stromsonst --password 0Vfe-ims7 --host 192.168.1.10|tail
+stromverbrauch.py gettable --table waermepumpe --password 0Vfe-ims7 --host 192.168.1.10|tail
+stromverbrauch.py addone --host 192.168.1.10 --table wasser --password 0Vfe-ims7 --zaehlerstand 649
+stromverbrauch.py addone --host 192.168.1.10 --table stromsonst --password 0Vfe-ims7 --zaehlerstand 17553.98
+stromverbrauch.py addone --host 192.168.1.10 --table waermepumpe --password 0Vfe-ims7 --zaehlerstand 15456.76
+stromverbrauch.py plotall --password 0Vfe-ims7 --user python_user --database stromverbrauch
 ```
 
 ## Testing
