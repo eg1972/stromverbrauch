@@ -79,7 +79,7 @@ if args.preis == None:
     if args.table == 'wasser':
         args.preis = 1.8032
     elif args.table == 'stromsonst':
-        args.preis = 0.2463
+        args.preis = 0.2651
     elif args.table == 'waermepumpe':
         args.preis = 0.1903
 
