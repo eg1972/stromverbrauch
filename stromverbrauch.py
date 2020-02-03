@@ -81,7 +81,7 @@ if args.preis == None:
     elif args.table == 'stromsonst':
         args.preis = 0.2651
     elif args.table == 'waermepumpe':
-        args.preis = 0.1903
+        args.preis = 0.2123
 
 if args.command == 'plotall':
     print('===> plotall')
