@@ -2,8 +2,8 @@
 
 import sys
 # extend the search path for my module 'db_access' and the functions
-#sys.path.append('/home/eddgest/PycharmProjects/stromverbrauch/libs')
-sys.path.append('/home/eddgest/.local/lib/python3.6/site-packages/stromverbrauch')
+sys.path.append('/home/eddgest/PycharmProjects/stromverbrauch/libs')
+#sys.path.append('/home/eddgest/.local/lib/python3.6/site-packages/stromverbrauch')
 #functions for this program
 import stromverbrauch_functions as sfunc
 #import stromverbrauch.stromverbrauch_functions as sfunc
@@ -86,7 +86,7 @@ if args.preis == None:
 if args.command == 'plotall':
     print('===> plotall')
     stromverbrauch = sfunc.connect_db(args)
-    datum, kosten_wasser, kosten_stromsonst, kosten_waermepumpe = sfunc.get_plotdata(stromverbrauch)
+    datum, kosten_wasser, kosten_stromsonst, kosten_waermepumpe, verbrauch_wasser, verbrauch_waermepumpe, verbrauch_stromsonst = sfunc.get_plotdata(stromverbrauch)
     stromverbrauch.close_db()
     # construct Pandas DF and plot
     data = {'Kosten Wasser': kosten_wasser, 'Kosten Haushaltsstrom': kosten_stromsonst, 'Kosten Wärmepumpe': kosten_waermepumpe}
@@ -96,10 +96,31 @@ if args.command == 'plotall':
     except:
         print('===> ERROR: could not construct Pandas DataFrame')
         sys.exit()
-    df.plot(kind='bar',stacked='True')
-    plt.title("Stromverbrauch Steinwachs")
-    plt.xlabel('Zeit')
-    plt.ylabel('Kosten')
+#    df.plot(kind='bar',stacked='True')
+#    plt.title("Stromverbrauch Steinwachs")
+#    plt.xlabel('Zeit')
+#    plt.ylabel('Kosten')
+#    plt.show()
+    # sub-plot:
+    plt.figure()
+    plt.subplot(2,1,1)
+    p1 = plt.plot(datum, kosten_waermepumpe, datum, kosten_wasser, datum, kosten_stromsonst)
+    plt.legend(p1, ('Wärmepumpe', 'Wasser', 'Haushaltsstrom'))
+    plt.xlabel('Zeit'); plt.ylabel('Kosten')
+    plt.subplot(2,1,2)
+    p2 = plt.plot(datum, verbrauch_waermepumpe, datum, verbrauch_wasser, datum, verbrauch_stromsonst)
+    plt.legend(p2, ('Wärmepumpe', 'Wasser', 'Haushaltsstrom'))
+    plt.xlabel('Zeit'); plt.ylabel('Verbrauch')
+    #figure = plt.figure()
+    #figure.suptitle("Verbrauch und Kosten")
+    #axis1 = figure.add_subplot(2, 1, 1)
+    #axis1.plot(datum, kosten_waermepumpe, datum, kosten_wasser, datum, kosten_stromsonst)
+    #axis1.legend()
+    #axis1.set_title("Kosten")
+    #axis2 = figure.add_subplot(2, 1, 2)
+    #axis2.plot(datum, verbrauch_waermepumpe, datum, verbrauch_wasser, datum, verbrauch_stromsonst)
+    #axis2.legend()
+    #axis2.set_title(("Verbrauch"))
     plt.show()
 elif args.command == 'gettable':
     print('===> gettable')

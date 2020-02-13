@@ -3,8 +3,8 @@
 import sys
 
 # extend the search path for my module 'db_access' and the functions
-#sys.path.append('/home/eddgest/PycharmProjects/stromverbrauch/libs')
-sys.path.append('/home/eddgest/.local/lib/python3.6/site-packages/stromverbrauch')
+sys.path.append('/home/eddgest/PycharmProjects/stromverbrauch/libs')
+#sys.path.append('/home/eddgest/.local/lib/python3.6/site-packages/stromverbrauch')
 #import stromverbrauch.db_access
 import db_access
 import pandas as pd
@@ -36,10 +36,13 @@ def connect_db(args):
 def get_plotdata(stromverbrauch):
     ''' get datum and kosten rows from the tables'''
     print('===> get_plotdata():')
-    datum, kosten_stromsonst = stromverbrauch.getxy("stromsonst")
-    datum, kosten_waermepumpe = stromverbrauch.getxy("waermepumpe")
-    datum, kosten_wasser = stromverbrauch.getxy("wasser")
-    return datum, kosten_wasser, kosten_stromsonst, kosten_waermepumpe
+    datum, kosten_stromsonst = stromverbrauch.getxy("stromsonst", "Kosten")
+    datum, kosten_waermepumpe = stromverbrauch.getxy("waermepumpe", "Kosten")
+    datum, kosten_wasser = stromverbrauch.getxy("wasser", "Kosten")
+    datum, verbrauch_stromsonst = stromverbrauch.getxy("stromsonst", "Verbrauch")
+    datum, verbrauch_waermepumpe = stromverbrauch.getxy("waermepumpe", "Verbrauch")
+    datum, verbrauch_wasser = stromverbrauch.getxy("wasser", "Verbrauch")
+    return datum, kosten_wasser, kosten_stromsonst, kosten_waermepumpe, verbrauch_wasser, verbrauch_waermepumpe, verbrauch_stromsonst
 
 
 def merge_df(df1, df2):
