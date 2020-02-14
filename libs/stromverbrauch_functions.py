@@ -3,8 +3,8 @@
 import sys
 
 # extend the search path for my module 'db_access' and the functions
-sys.path.append('/home/eddgest/PycharmProjects/stromverbrauch/libs')
-#sys.path.append('/home/eddgest/.local/lib/python3.6/site-packages/stromverbrauch')
+#sys.path.append('/home/eddgest/PycharmProjects/stromverbrauch/libs')
+sys.path.append('/home/eddgest/.local/lib/python3.6/site-packages/stromverbrauch')
 #import stromverbrauch.db_access
 import db_access
 import pandas as pd

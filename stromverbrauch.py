@@ -2,8 +2,8 @@
 
 import sys
 # extend the search path for my module 'db_access' and the functions
-sys.path.append('/home/eddgest/PycharmProjects/stromverbrauch/libs')
-#sys.path.append('/home/eddgest/.local/lib/python3.6/site-packages/stromverbrauch')
+#sys.path.append('/home/eddgest/PycharmProjects/stromverbrauch/libs')
+sys.path.append('/home/eddgest/.local/lib/python3.6/site-packages/stromverbrauch')
 #functions for this program
 import stromverbrauch_functions as sfunc
 #import stromverbrauch.stromverbrauch_functions as sfunc
