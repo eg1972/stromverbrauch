@@ -103,6 +103,8 @@ if args.command == 'plotall':
 #    plt.show()
     # sub-plot:
     # TODO: smothen out the graph
+        # https://scipy-cookbook.readthedocs.io/items/RadialBasisFunctions.html
+        # https://stackoverflow.com/questions/5283649/plot-smooth-line-with-pyplot
         #from scipy.ndimage.filters import gaussian_filter1d
         #ysmoothed = gaussian_filter1d(y, sigma=2)
         #plt.plot(x, ysmoothed)
