@@ -108,11 +108,11 @@ class db_access():
         rows = self.execute_query(query)
         return rows;
 
-    def getxy(self, table, row):
+    def getxy(self, table, column):
         '''Get datum and kosten rows from a table.
         datum,kosten_stromsonst = stromverbrauch.getxy("stromsonst")
         '''
-        query = "SELECT datum," + row + " FROM " + table + ";"
+        query = "SELECT datum," + column + " FROM " + table + ";"
         rows = self.execute_query(query)
         datum = list()
         kosten = list()
