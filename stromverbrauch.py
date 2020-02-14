@@ -14,7 +14,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 # for argparse
 import argparse
-#import textwrap
 import datetime
 
 #TODO: Authentication
@@ -90,9 +89,16 @@ if args.command == 'plotall':
     stromverbrauch.close_db()
     # construct Pandas DF and plot
     data = {'Kosten Wasser': kosten_wasser, 'Kosten Haushaltsstrom': kosten_stromsonst, 'Kosten Wärmepumpe': kosten_waermepumpe}
+    #data2 = {'datum': datum, 'Kosten Wasser': kosten_wasser, 'Kosten Haushaltsstrom': kosten_stromsonst, 'Kosten Wärmepumpe': kosten_waermepumpe}
     index = datum
     try:
         df = pd.DataFrame(data, index)
+        df2 = pd.DataFrame({
+            'datum': datum,
+            'kosten_wasser': kosten_wasser,
+            'kosten_stromsonst': kosten_stromsonst,
+            'kosten_waermepumpe': kosten_waermepumpe
+        })
     except:
         print('===> ERROR: could not construct Pandas DataFrame')
         sys.exit()
@@ -101,24 +107,25 @@ if args.command == 'plotall':
 #    plt.xlabel('Zeit')
 #    plt.ylabel('Kosten')
 #    plt.show()
-    # sub-plot:
-    # TODO: smothen out the graph
-        # https://scipy-cookbook.readthedocs.io/items/RadialBasisFunctions.html
-        # https://stackoverflow.com/questions/5283649/plot-smooth-line-with-pyplot
-        #from scipy.ndimage.filters import gaussian_filter1d
-        #ysmoothed = gaussian_filter1d(y, sigma=2)
-        #plt.plot(x, ysmoothed)
-        #plt.show()
-    plt.figure()
-    plt.subplot(2,1,1)
-    p1 = plt.plot(datum, kosten_waermepumpe, datum, kosten_wasser, datum, kosten_stromsonst)
-    plt.legend(p1, ('Wärmepumpe', 'Wasser', 'Haushaltsstrom'))
-    plt.xlabel('Zeit'); plt.ylabel('Kosten in €')
-    plt.subplot(2,1,2)
-    p2 = plt.plot(datum, verbrauch_waermepumpe, datum, verbrauch_wasser, datum, verbrauch_stromsonst)
-    plt.legend(p2, ('Wärmepumpe', 'Wasser', 'Haushaltsstrom'))
-    plt.xlabel('Zeit'); plt.ylabel('Verbrauch in KWh oder l')
+    ax = plt.gca()  # gca stands for 'get current axis'
+    df.plot(kind='bar', stacked='True')
+    df2.plot(kind='line', x='datum', y='kosten_wasser', ax=ax)
+    df2.plot(kind='line', x='datum', y='kosten_stromsonst', ax=ax)
+    df2.plot(kind='line', x='datum', y='kosten_waermepumpe', ax=ax)
+    plt.xlabel('Zeit')
+    plt.ylabel('Kosten')
     plt.show()
+    # sub-plot:
+    #plt.figure()
+    #plt.subplot(2,1,1)
+    #p1 = plt.plot(datum, kosten_waermepumpe, datum, kosten_wasser, datum, kosten_stromsonst)
+    #plt.legend(p1, ('Wärmepumpe', 'Wasser', 'Haushaltsstrom'))
+    #plt.xlabel('Zeit'); plt.ylabel('Kosten in €')
+    #plt.subplot(2,1,2)
+    #p2 = plt.plot(datum, verbrauch_waermepumpe, datum, verbrauch_wasser, datum, verbrauch_stromsonst)
+    #plt.legend(p2, ('Wärmepumpe', 'Wasser', 'Haushaltsstrom'))
+    #plt.xlabel('Zeit'); plt.ylabel('Verbrauch in KWh oder l')
+    #plt.show()
 elif args.command == 'gettable':
     print('===> gettable')
     stromverbrauch = sfunc.connect_db(args)
