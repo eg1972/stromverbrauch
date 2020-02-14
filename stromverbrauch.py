@@ -102,6 +102,11 @@ if args.command == 'plotall':
 #    plt.ylabel('Kosten')
 #    plt.show()
     # sub-plot:
+    # TODO: smothen out the graph
+        #from scipy.ndimage.filters import gaussian_filter1d
+        #ysmoothed = gaussian_filter1d(y, sigma=2)
+        #plt.plot(x, ysmoothed)
+        #plt.show()
     plt.figure()
     plt.subplot(2,1,1)
     p1 = plt.plot(datum, kosten_waermepumpe, datum, kosten_wasser, datum, kosten_stromsonst)
