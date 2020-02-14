@@ -106,11 +106,11 @@ if args.command == 'plotall':
     plt.subplot(2,1,1)
     p1 = plt.plot(datum, kosten_waermepumpe, datum, kosten_wasser, datum, kosten_stromsonst)
     plt.legend(p1, ('Wärmepumpe', 'Wasser', 'Haushaltsstrom'))
-    plt.xlabel('Zeit'); plt.ylabel('Kosten')
+    plt.xlabel('Zeit'); plt.ylabel('Kosten in €')
     plt.subplot(2,1,2)
     p2 = plt.plot(datum, verbrauch_waermepumpe, datum, verbrauch_wasser, datum, verbrauch_stromsonst)
     plt.legend(p2, ('Wärmepumpe', 'Wasser', 'Haushaltsstrom'))
-    plt.xlabel('Zeit'); plt.ylabel('Verbrauch')
+    plt.xlabel('Zeit'); plt.ylabel('Verbrauch in KWh oder l')
     plt.show()
 elif args.command == 'gettable':
     print('===> gettable')
