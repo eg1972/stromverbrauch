@@ -25,6 +25,12 @@ stromverbrauch.py addone --host 192.168.1.10 --table waermepumpe --password 0Vfe
 stromverbrauch.py plotall --password 0Vfe-ims7 --user python_user --database stromverbrauch
 ```
 
+## Development
+Add the development directory to the PYTHONPATH:
+```
+export PYTHONPATH=/home/eddgest/PycharmProjects/stromverbrauch/libs
+```
+
 ## Testing
 ### Automated Testing
 Run script to automatically
@@ -36,8 +42,9 @@ Run script to automatically
 ```
 
 ### Manually Create a DB for testing
-To quickly create a DB:
-https://hub.docker.com/_/mariadb
+To quickly create a DB: [https://hub.docker.com/_/mariadb](https://hub.docker.com/_/mariadb)
+
+Note: The docker-entrypoint-initdb.d directory is executed on startup and configures the DB
 ```
 mysqldump --lock-tables -h 192.168.1.10 -u python_user -p0Vfe-ims7 stromverbrauch > /tmp/stromverbrauch-dbbackup_NUC_`date +"%Y%m%d"`.sql
 
@@ -45,7 +52,14 @@ docker run -d --rm --publish 127.0.0.1:3306:3306 \
     -e MYSQL_ROOT_PASSWORD=12test34 \
     -v /home/eddgest/PycharmProjects/stromverbrauch/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d \
     --name mariadb-test mariadb:latest
+mysql -h"127.0.0.1" -P"3306" -u"root" -p"12test34" stromverbrauch < /tmp/stromverbrauch-dbbackup_NUC_20200214.sql
 
+cd ~/PycharmProjects/stromverbrauch/
+export PYTHONPATH=/home/eddgest/PycharmProjects/stromverbrauch/libs
+./stromverbrauch.py plotall --host 127.0.0.1 --port 3306 --database stromverbrauch --password 12test34 --user python_user
+```
+to manually load the data:
+```
 mysql -h"127.0.0.1" -P"3306" -u"root" -p"12test34" stromverbrauch
 create database stromverbrauch;
 create user 'python_user'@'%' identified by '12test34';
