@@ -102,6 +102,7 @@ def gettable(args):
 
 
 def addone(args):
+    offset_wasser = 845                                                                                                 # offset due to new counter
     try:
         #print('===> addone: connecting to DB...')
         stromverbrauch = connect_db(args)
@@ -111,6 +112,8 @@ def addone(args):
     #print('===> addone: getting last row...')
     row = stromverbrauch.getlastrow(args.table)
     index_old, datum_old, zaehlerstand_old, verbrauch_old, verbrauch_old, kosten_old = row
+    if args.table == "wasser":                                                                                          # add offset to zaehlerstand
+        zaehlerstand_old = zaehlerstand_old + offset_wasser
     verbrauch = float(args.zaehlerstand) - zaehlerstand_old
     kosten = verbrauch*float(args.preis)
     query_dict = {
