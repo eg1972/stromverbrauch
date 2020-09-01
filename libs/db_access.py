@@ -186,7 +186,6 @@ class db_access():
         datum = dictArg.get('datum')
         zaehlerstand = str(dictArg.get('zaehlerstand'))
         preis = str(dictArg.get('preis'))
-
         try:
             sqltable = sqlalchemy.Table(table, self.metadata, autoload=True)
             rinsert = sqltable.insert()
