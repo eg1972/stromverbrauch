@@ -113,8 +113,7 @@ def addone(args):
     row = stromverbrauch.getlastrow(args.table)
     index_old, datum_old, zaehlerstand_old, verbrauch_old, verbrauch_old, kosten_old = row
     if args.table == "wasser":                                                                                          # add offset to zaehlerstand
-        zaehlerstand_old = zaehlerstand_old + offset_wasser
-    verbrauch = float(args.zaehlerstand) - zaehlerstand_old
+    verbrauch = float(args.zaehlerstand) + offset_wasser - zaehlerstand_old
     kosten = verbrauch*float(args.preis)
     query_dict = {
         'table': args.table,
