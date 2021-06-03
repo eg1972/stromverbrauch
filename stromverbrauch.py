@@ -76,8 +76,10 @@ if args.preis == None:
     if args.table == 'wasser':
         args.preis = 1.8032
     elif args.table == 'stromsonst':
+        # change on 1.5.2021: 0.2683
         args.preis = 0.2651
     elif args.table == 'waermepumpe':
+        # change on 1.5.2021: 0.2191
         args.preis = 0.2123
 
 if args.command == 'plotall':

@@ -103,8 +103,8 @@ def gettable(args):
 
 def addone(args):
     offset_wasser = 845                                                                                                 # offset due to new counter
-    offset_stromsonst = 0
-    offset_waermepumpe = 0
+    offset_stromsonst = 26570
+    offset_waermepumpe = 20802
     try:
         #print('===> addone: connecting to DB...')
         stromverbrauch = connect_db(args)
@@ -117,8 +117,14 @@ def addone(args):
     if args.table == "wasser":                                                                                          # add offset to zaehlerstand
         zaehlerstand_mod = float(args.zaehlerstand) + offset_wasser
         verbrauch = zaehlerstand_mod - zaehlerstand_old
-    else:
+    elif args.table == "stromsonst":                                                                                    # add offset to zaehlerstand
         zaehlerstand_mod = float(args.zaehlerstand) + offset_stromsonst
+        verbrauch = zaehlerstand_mod - zaehlerstand_old
+    elif args.table == "waermepumpe":                                                                                   # add offset to zaehlerstand
+        zaehlerstand_mod = float(args.zaehlerstand) + offset_waermepumpe
+        verbrauch = zaehlerstand_mod - zaehlerstand_old
+    else:
+        zaehlerstand_mod = float(args.zaehlerstand)
         verbrauch = zaehlerstand_mod - zaehlerstand_old
     kosten = verbrauch*float(args.preis)
     # NOTE: verbrauch is calculated on the DB
