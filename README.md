@@ -14,15 +14,14 @@ The front end can:
 
 ## Monthly maintenance
 ```
-Each month:
-#cd /home/eddgest/PycharmProjects/stromverbrauch
-stromverbrauch.py gettable --table wasser --password 0Vfe-ims7 --host 192.168.1.10|tail
-stromverbrauch.py gettable --table stromsonst --password 0Vfe-ims7 --host 192.168.1.10|tail
-stromverbrauch.py gettable --table waermepumpe --password 0Vfe-ims7 --host 192.168.1.10|tail
-stromverbrauch.py addone --host 192.168.1.10 --table wasser --password 0Vfe-ims7 --zaehlerstand 649
-stromverbrauch.py addone --host 192.168.1.10 --table stromsonst --password 0Vfe-ims7 --zaehlerstand 17553.98
-stromverbrauch.py addone --host 192.168.1.10 --table waermepumpe --password 0Vfe-ims7 --zaehlerstand 15456.76
-stromverbrauch.py plotall --password 0Vfe-ims7 --user python_user --database stromverbrauch
+# Each month:
+stromverbrauch.py plotall --password 0Vfe-ims7 --user strom --database stromverbrauch --host 192.168.1.11
+stromverbrauch.py gettable --password 0Vfe-ims7 --user strom --database stromverbrauch --host 192.168.1.11 --table wasser | tail
+stromverbrauch.py addone --password 0Vfe-ims7 --user strom --database stromverbrauch --host 192.168.1.11 --table wasser --zaehlerstand xxx
+stromverbrauch.py gettable --password 0Vfe-ims7 --user strom --database stromverbrauch --host 192.168.1.11 --table stromsonst | tail
+stromverbrauch.py addone --password 0Vfe-ims7 --user strom --database stromverbrauch --host 192.168.1.11 --table stromsonst --zaehlerstand xxx
+stromverbrauch.py gettable --password 0Vfe-ims7 --user strom --database stromverbrauch --host 192.168.1.11 --table waermepumpe | tail
+stromverbrauch.py addone --password 0Vfe-ims7 --user strom --database stromverbrauch --host 192.168.1.11 --table waermepumpe --zaehlerstand xxx
 ```
 
 ## Development
