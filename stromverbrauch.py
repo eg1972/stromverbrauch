@@ -74,17 +74,18 @@ args = parser.parse_args()
 if args.preis == None:
     print('===> NOTE: --preis not specified; using pre-defined values.')
     if args.table == 'wasser':
-        args.preis = 1.8032               # 1.9963 (von Rechnung)
+        #args.preis = 1.8032
+        args.preis = 1.9963  # 1.9963 (von Rechnung)
     elif args.table == 'stromsonst':
         # change on 1.5.2021: 0.2683      # laut letzter Preisänderung (5/2021)
-        args.preis = 0.2651               # 22,41 (von letzter Rechnung)
+        #args.preis = 0.2651               # 22,41 (von letzter Rechnung)
         # change on 1.11.2022
-        #args.preis = 0.3176
+        args.preis = 0.3176
     elif args.table == 'waermepumpe':
         # change on 1.5.2021: 0.2191      # laut letzter Preisänderung (5/2021);
-        args.preis = 0.2123               # 17,48 (von letzter Rechnung)
+        #args.preis = 0.2123               # 17,48 (von letzter Rechnung)
         # change on 1.11.2022
-        #args.preis = 0.2683
+        args.preis = 0.2683
 
 if args.command == 'plotall':
     print('===> plotall')
