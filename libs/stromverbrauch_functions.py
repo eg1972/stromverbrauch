@@ -180,12 +180,10 @@ def examples(args):
   ./stromverbrauch.py gettable --table wasser --password 0Vfe-ims7 --host 192.168.1.10
 
   Each month:
-  stromverbrauch.py addone --host 192.168.1.10 --table wasser --password 0Vfe-ims7 --zaehlerstand 649
-  stromverbrauch.py gettable --table wasser --password 0Vfe-ims7 --host 192.168.1.10|tail
-  stromverbrauch.py addone --host 192.168.1.10 --table stromsonst --password 0Vfe-ims7 --zaehlerstand 17553.98
-  stromverbrauch.py gettable --table stromsonst --password 0Vfe-ims7 --host 192.168.1.10|tail
-  stromverbrauch.py addone --host 192.168.1.10 --table waermepumpe --password 0Vfe-ims7 --zaehlerstand 15456.76
-  stromverbrauch.py gettable --table waermepumpe --password 0Vfe-ims7 --host 192.168.1.10|tail
+      stromverbrauch.py plotall --password 0Vfe-ims7 --user strom --database stromverbrauch --host 192.168.1.11
+      stromverbrauch.py addone --password 0Vfe-ims7 --user strom --database stromverbrauch --host 192.168.1.11 --table wasser --zaehlerstand xxx
+      stromverbrauch.py addone --password 0Vfe-ims7 --user strom --database stromverbrauch --host 192.168.1.11 --table stromsonst --zaehlerstand xxx
+      stromverbrauch.py addone --password 0Vfe-ims7 --user strom --database stromverbrauch --host 192.168.1.11 --table waermepumpe --zaehlerstand xxx
 
   To quickly create a DB:
       mysqldump --lock-tables -h 192.168.1.10 -u python_user -p0Vfe-ims7 stromverbrauch > /mnt/data-aldi-admin/gereon/backup/mysql-backup/stromverbrauch-dbbackup_NUC_`date +"%Y%m%d"`.bak
