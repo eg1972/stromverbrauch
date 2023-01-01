@@ -59,7 +59,7 @@ def plotall(args):
     stromverbrauch.close_db()
     # construct Pandas DF and plot
     data = {'Kosten Wasser': kosten_wasser, 'Kosten Haushaltsstrom': kosten_stromsonst,
-            'Kosten Wärmepumpe': kosten_waermepumpe}
+            'Kosten Wärmepumpe': kosten_waermepumpe, 'Verbrauch Haushaltsstrom': verbrauch_stromsonst, 'Verbrauch Wärmepumpe': verbrauch_waermepumpe}
     # data2 = {'datum': datum, 'Kosten Wasser': kosten_wasser, 'Kosten Haushaltsstrom': kosten_stromsonst, 'Kosten Wärmepumpe': kosten_waermepumpe}
     index = datum
     try:
@@ -70,21 +70,29 @@ def plotall(args):
             'kosten_stromsonst': kosten_stromsonst,
             'kosten_waermepumpe': kosten_waermepumpe
         })
+        df3 = pd.DataFrame({
+            'datum': datum,
+            'verbrauch_stromsonst': verbrauch_stromsonst,
+            'verbrauch_waermepumpe': verbrauch_waermepumpe
+        })
     except:
         print('===> ERROR: could not construct Pandas DataFrame')
         sys.exit()
-    #    df.plot(kind='bar',stacked='True')
-    #    plt.title("Stromverbrauch Steinwachs")
-    #    plt.xlabel('Zeit')
-    #    plt.ylabel('Kosten')
-    #    plt.show()
-    ax = plt.gca()  # gca stands for 'get current axis'
-    df.plot(kind='bar', stacked='True')
-    df2.plot(kind='line', x='datum', y='kosten_wasser', ax=ax)
-    df2.plot(kind='line', x='datum', y='kosten_stromsonst', ax=ax)
-    df2.plot(kind='line', x='datum', y='kosten_waermepumpe', ax=ax)
+
+    axis1 = plt.gca()  # gca stands for 'get current axis'
+    # uncomment this to see stacked values in a bar-chart (but the verbrauch will also appear, unfortunately...)
+    #df.plot(kind='bar', stacked='True')
+    df2.plot(kind='line', x='datum', y='kosten_wasser', ax=axis1)
+    df2.plot(kind='line', x='datum', y='kosten_stromsonst', ax=axis1)
+    df2.plot(kind='line', x='datum', y='kosten_waermepumpe', ax=axis1)
     plt.xlabel('Zeit')
     plt.ylabel('Kosten')
+    plt.show()
+    axis2 = plt.gca()  # gca stands for 'get current axis'
+    df3.plot(kind='line', x='datum', y='verbrauch_stromsonst', ax=axis2)
+    df3.plot(kind='line', x='datum', y='verbrauch_waermepumpe', ax=axis2)
+    plt.xlabel('Zeit')
+    plt.ylabel('Verbrauch')
     plt.show()
 
 def gettable(args):
